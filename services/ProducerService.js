@@ -6,7 +6,6 @@ class ProducerService {
     this.producer = producer;
     this.config = config;
     this.prefix = process.env.CLOUDKARAFKA_TOPIC_PREFIX;
-    this.topic = `${this.prefix}${this.config["dev-api"].topic}`;
   }
 
   runForever = async (func, api, ms) => {
@@ -20,14 +19,14 @@ class ProducerService {
         publishData = { ...data };
       }
       this.producer.produce(
-        this.topic,
+        `${this.prefix}${this.config[api].topic}`,
         this.config[api].partition,
         Buffer.from(JSON.stringify(publishData)),
         api
       );
     } catch (error) {
       let publishData;
-      if (error.response.data) {
+      if (error.response && error.response.data) {
         publishData = error.response.data;
       } else {
         publishData = {
@@ -36,7 +35,7 @@ class ProducerService {
         };
       }
       this.producer.produce(
-        this.topic,
+        `${this.prefix}${this.config[api].topic}`,
         this.config[api].partition,
         Buffer.from(JSON.stringify(publishData)),
         api

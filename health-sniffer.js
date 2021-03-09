@@ -3,7 +3,6 @@ const config = require("./health.config");
 const Kafka = require("node-rdkafka");
 const ProducerService = require("./services/ProducerService");
 
-console.log(config);
 const kafkaConf = {
   "group.id": "cloudkarafka-test-producer",
   "metadata.broker.list": process.env.CLOUDKARAFKA_BROKERS.split(","),
@@ -17,7 +16,6 @@ const kafkaConf = {
 
 const producer = new Kafka.Producer(kafkaConf);
 const producerService = new ProducerService(producer, config);
-producer.produce;
 producer.on("ready", producerService.ready);
 
 producer.on("disconnected", producerService.disconnected);
