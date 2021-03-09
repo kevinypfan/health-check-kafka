@@ -1,5 +1,5 @@
 require("dotenv").config();
-const config = require("./health.config");
+const config = require("./configs");
 const Kafka = require("node-rdkafka");
 const ProducerService = require("./services/ProducerService");
 
