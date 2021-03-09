@@ -2,7 +2,7 @@ const defaultConfig = require("./config");
 const devConfig = require("./config.dev");
 const prodConfig = require("./config.prod");
 
-const config = defaultConfig;
+let config = defaultConfig;
 
 if (process.env.NODE_ENV === "development") {
   config = devConfig;
