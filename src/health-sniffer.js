@@ -3,6 +3,8 @@ const config = require("./configs");
 const Kafka = require("node-rdkafka");
 const ProducerService = require("./services/ProducerService");
 
+console.log(config);
+
 const kafkaConf = {
   "group.id": "cloudkarafka-test-producer",
   "metadata.broker.list": process.env.CLOUDKARAFKA_BROKERS.split(","),
